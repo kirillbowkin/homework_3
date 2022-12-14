@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://ticketReservation.caption">
+    <data>
+        <collection id="flightsDc" class="com.sample.airtickets.entity.Flight">
+            <fetchPlan extends="_base">
+                <property name="fromAirport" fetchPlan="_instance_name"/>
+                <property name="toAirport" fetchPlan="_instance_name"/>
+                <property name="airline" fetchPlan="_instance_name"/>
+            </fetchPlan>
+        </collection>
+        <collection id="airportsDc" class="com.sample.airtickets.entity.Airport">
+            <fetchPlan extends="_base"/>
+            <loader id="airportsDl">
+                <query>
+                    <![CDATA[select e from Airport e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <layout>
+        <groupBox id="filter" caption="Filter" spacing="true">
+            <entityComboBox id="fromField" caption="From" optionsContainer="airportsDc"/>
+            <entityComboBox id="toField" caption="To" optionsContainer="airportsDc"/>
+            <dateField id="departureDateField"
+                       caption="Departure date"
+                       datatype="LocalDate"
+                       resolution="DAY"/>
+            <button id="searchBtn"
+                    caption="Search"
+                    icon="font-icon:SEARCH"
+                    stylename="friendly"/>
+            <progressBar id="searchProgress" indeterminate="true" width="100%" visible="false"/>
+        </groupBox>
+        <table id="flightsTable" height="100%" width="100%" dataContainer="flightsDc">
+            <columns>
+                <column id="number"/>
+                <column id="fromAirport"/>
+                <column id="toAirport"/>
+                <column id="airline"/>
+                <column id="takeOffDate"/>
+            </columns>
+        </table>
+    </layout>
+</window>
