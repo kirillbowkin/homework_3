@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 public class UppercaseFormatter implements Formatter<String> {
     @Override
     public String apply(String value) {
-        return value.toUpperCase();
+        return value != null
+                ? value.toUpperCase()
+                : null;
     }
 }
