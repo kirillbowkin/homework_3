@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://ticketBrowse.caption"
+        focusComponent="ticketForm">
+    <data readOnly="true">
+
+        <instance id="ticketDc" class="com.sample.airtickets.entity.Ticket">
+            <fetchPlan extends="_base">
+                <property name="flight" fetchPlan="_base">
+                    <property name="fromAirport" fetchPlan="_instance_name"/>
+                    <property name="toAirport" fetchPlan="_instance_name"/>
+                    <property name="airline" fetchPlan="_instance_name"/>
+                </property>
+            </fetchPlan>
+            <loader id="ticketDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="ticketForm">
+            <form id="ticketForm" dataContainer="ticketDc">
+                <column>
+                    <textField property="reservationId" editable="false"/>
+                    <textField property="passportNumber" editable="false"/>
+                    <textField property="passengerName" editable="false"/>
+                    <textField property="telephone" editable="false"/>
+                    <textField property="flight.number" editable="false"/>
+                    <textField property="flight.airline" editable="false"/>
+                    <textField property="flight.fromAirport" editable="false"/>
+                    <textField property="flight.toAirport" editable="false"/>
+                    <dateField property="flight.takeOffDate" datatype="offsetDateTime" editable="false"/>
+                </column>
+            </form>
+
+    </layout>
+</window>

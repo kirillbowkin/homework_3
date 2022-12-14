@@ -20,6 +20,14 @@
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
+        <inputDialog id="inputDialog" caption="Reserve ticket" dialogActions="OK_CANCEL">
+            <parameters>
+                <stringParameter id="reservationId" caption="Reservation id" required="true" />
+                <stringParameter id="passportNumber" caption="Passport number" required="true" />
+                <stringParameter id="passengerName" caption="Passenger name" required="true" />
+                <stringParameter id="telephone" caption="Telephone" required="true" />
+            </parameters>
+        </inputDialog>
     </facets>
     <layout>
         <groupBox id="filter" caption="Filter" spacing="true">
@@ -36,12 +44,16 @@
             <progressBar id="searchProgress" indeterminate="true" width="100%" visible="false"/>
         </groupBox>
         <table id="flightsTable" height="100%" width="100%" dataContainer="flightsDc">
+            <actions>
+                <action id="reserve" type="reserve"/>
+            </actions>
             <columns>
                 <column id="number"/>
                 <column id="fromAirport"/>
                 <column id="toAirport"/>
                 <column id="airline"/>
                 <column id="takeOffDate"/>
+                <column id="reserveBtn" caption="Action" />
             </columns>
         </table>
     </layout>
